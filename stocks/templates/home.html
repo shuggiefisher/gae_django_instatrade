@@ -1,0 +1,29 @@
+{% extends "bootstrap.html" %}
+
+{% block main_content %}
+    <div class="span10">
+        {% for stock in stocks %}
+            <div class="stock_listing">
+                <h2>
+                    <a href="{% url stock stock.name %}">{{ stock.name }}</a>
+                    {% if stock.advice == 'sell' %}
+                        <span class="pull-right" style="margin-right: 20px;">
+                            <small>{{ stock.score|floatformat:3 }}</small>
+                            <button class="btn danger">Sell</button>
+                        </span>
+                    {% endif %}
+                    {% if stock.advice == 'buy' %}
+                        <span class="pull-right" style="margin-right: 20px;">
+                            <small>{{ stock.score|floatformat:3 }}</small>
+                            <button class="btn success">Buy</button>
+                        </span>
+                    {% endif %}
+                </h2>
+                <h3>Keywords</h3>
+                {% for keyword in stock.keywords %}
+                    {{ keyword }},
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

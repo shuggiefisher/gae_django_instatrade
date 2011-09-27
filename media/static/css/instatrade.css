@@ -1,0 +1,36 @@
+a.connect_with_twitter_button {
+    background: url(/static/images/graphics/connect_146px.png) no-repeat 0 0;
+    width: 146px;
+    height: 23px;
+    display: block;
+    text-indent: -9999px;
+    margin-top: 18px;
+}
+
+a.connect_with_twitter_button:hover { background-position: 0 -23px; }
+
+a.connect_with_twitter_button:active { background-position: 0 -46px; }
+
+img#dropdown_profile_image {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    margin-right: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+span#fb_like_button {
+    margin-top: 9px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.stock_listing {
+    margin-bottom: 30px;
+}
+
+.stock_graph {
+    margin-bottom: 80px;
+}

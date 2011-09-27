@@ -1,0 +1,161 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Instatrade</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script src="{{ STATIC_URL }}js/jquery-1.6.4.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      });
+    </script>
+    
+    {% block extra_js %}
+    
+    {% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/instatrade.css" />
+    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+
+      /* Styles you shouldn't keep as they are for displaying this base example only */
+      .content .span10,
+      .content .span4 {
+        min-height: 500px;
+      }
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="{% url home %}">Instatrade</a>
+          <span id="fb_like_button">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js#appId=201686689895293&xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            
+            <div class="fb-like" data-href="http://www.facebook.com/pages/Instatrade/292098524150180" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+          </span>
+          {% if request.user.is_anonymous %}
+            <button data-controls-modal="modal-login" data-backdrop="true" data-keyboard="true" class="btn pull-right" style="margin-top: 5px;" type="submit">Sign in</button>
+          {% else %}
+            <ul class="nav secondary-nav">
+              <li class="dropdown" data-dropdown="dropdown">
+                <a href="#" class="dropdown-toggle">
+                  <img id="dropdown_profile_image" src="{{ request.user.social_auth.get.extra_data.profile_image_url }}" height="20" width="20" />
+                  {{ request.user.username }}
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="divider"></li>
+                  <li><a href="/logout?next={{ request.get_full_path }}">Sign out</a></li>
+                </ul>
+              </li>
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+          <h1>Predicting the stock market with social media</h1>
+        </div>
+        <div class="row">
+          {% block main_content %}
+          {% endblock %}
+          <div class="span4">
+            {% block sidebar %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>© Instatrade 2011</p>
+      </footer>
+
+    </div>
+    
+    <div id="modal-login" class="modal hide fade in" style="display: none; ">
+      <div class="modal-header">
+        <a href="#" class="close">×</a>
+        <h3>Login to Instatrade</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          <a href="/login/twitter?next={{ request.get_full_path }}" class="connect_with_twitter_button">
+            <span>Connect with Twitter</span>
+          </a>
+        </p>
+      </div>
+    </div>
+
+</body>
+</html>
