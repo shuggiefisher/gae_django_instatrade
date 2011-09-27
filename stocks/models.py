@@ -1,15 +1,7 @@
 from django.db import models, transaction
 from django.contrib import admin
-from manytomany.models import ManyToManyField
 import datetime
 
-'''
-class Keyword(models.Model):
-    word = models.CharField(unique=True, null=False, blank=False, max_length=20)
-    
-    def __unicode__(self):
-        return str(self.word)
-'''
 
 class Stock(models.Model):
     name = models.CharField(unique=True, null=False, blank=False, max_length=20)
@@ -35,7 +27,6 @@ class Value(models.Model):
     def __unicode__(self):
         return str(str(self.stock) + ' : ' + str(self.date))
 
-#admin.site.register(Keyword)
 admin.site.register(Stock)
 admin.site.register(Value)
 
@@ -66,14 +57,6 @@ def importDB():
         values = list(db.values.find({'stock_id': stock['_id']}))[0]
         
         sentiments = list(db.sentiment.find({'stock_id': stock['_id']}))[0]
-        
-        '''
-        keywords = []
-        for kw in stock['keywords']:
-            keyword, created = Keyword.objects.get_or_create(word=kw.word)
-            if created is True:
-                keywords.append(keyword)
-        '''
         
         keywords = ', '.join(stock['keywords'])
             

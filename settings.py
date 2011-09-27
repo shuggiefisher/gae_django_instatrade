@@ -24,7 +24,6 @@ INSTALLED_APPS = (
     'djangotoolbox',
     'autoload',
     'dbindexer',
-    'manytomany',
     'social_auth',
     'stocks',
 

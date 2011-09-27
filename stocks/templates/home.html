@@ -1,4 +1,4 @@
-{% extends "bootstrap.html" %}
+{% extends "base.html" %}
 
 {% block main_content %}
     <div class="span10">
@@ -6,13 +6,13 @@
             <div class="stock_listing">
                 <h2>
                     <a href="{% url stock stock.name %}">{{ stock.name }}</a>
-                    {% if stock.advice == 'sell' %}
+                    {% if stock.advice == 'Sell' %}
                         <span class="pull-right" style="margin-right: 20px;">
                             <small>{{ stock.score|floatformat:3 }}</small>
                             <button class="btn danger">Sell</button>
                         </span>
                     {% endif %}
-                    {% if stock.advice == 'buy' %}
+                    {% if stock.advice == 'Buy' %}
                         <span class="pull-right" style="margin-right: 20px;">
                             <small>{{ stock.score|floatformat:3 }}</small>
                             <button class="btn success">Buy</button>
@@ -20,9 +20,7 @@
                     {% endif %}
                 </h2>
                 <h3>Keywords</h3>
-                {% for keyword in stock.keywords %}
-                    {{ keyword }},
-                {% endfor %}
+                {{ stocks.keywords }}
             </div>
         {% endfor %}
     </div>
